@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dropdown with Cursor Icon</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+       * {
+    font-family: sans-serif;
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+:root{
+    --bg: #222429;
+}
+body {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background: var(--bg);
+}
+
+.wrapper {
+    width: 300px;
+    position: relative;
+    color: #f5f5f5bb;
+    font-size: 20px;
+}
+
+.select {
+    width: 100%;
+    padding: 10px 30px;
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+    cursor: pointer;
+    border: 1px solid #ffffff22;            
+    background: #333740;
+}
+
+#select_text,
+#select_arrow {
+    pointer-events: none;
+}
+#select_text i{
+    margin-right: 10px;
+}
+
+.option-list {
+    position: absolute;
+    width: 100%;
+    top: 50px;
+    border-radius: 8px;
+    overflow: hidden;
+    display: none;
+    background: #333740;
+    border: 1px solid #ffffff22;
+}
+.option-list:hover{
+    cursor: none;
+}
+
+
+.option {
+    display: flex;
+    align-items: center;
+    padding: 10px 20px;
+    height: 55px;
+    transition: 0.5s;
+}
+.option:hover{
+    background: #222429;
+}
+
+.option i {
+    font-size: 16px;
+    margin: 5px;
+    width: 30px;
+    opacity: 0;
+    transition: 2s;
+}
+.option:hover i {
+    opacity: 1;
+}
+
+.option span {
+    transition: 0.5s;
+}
+
+.hide {
+    display: block;
+}
+
+.rotate {
+    transform: rotate(180deg);
+}
+
+#cursur {
+    display: none;
+    font-size: 16px;
+    padding: 2px 5px 1px;
+    border-radius: 4px;
+    background: #454354;
+    color: white;
+    position: absolute;
+    pointer-events: none;
+    z-index: 1000;
+    transform: translate(-50%, -50%);
+    transition: opacity 0.5s;
+}
+    </style>
+</head>
+
+<body>
+    <div class="wrapper">
+        <div class="select">
+            <span id="select_text">
+                <i class="fab fa-facebook"></i>
+                Facebook
+            </span>
+            <i id="select_arrow" class="fas fa-caret-down"></i>
+        </div>
+        <div class="option-list">
+            <div class="option">
+                <i class="fab fa-facebook"></i>
+                <span>Facebook</span>
+            </div>
+            <div class="option">
+                <i class="fab fa-youtube"></i>
+                <span>YouTube</span>
+            </div>
+            <div class="option">
+                <i class="fab fa-linkedin"></i>
+                <span>LinkedIn</span>
+            </div>
+            <div class="option">
+                <i class="fab fa-instagram"></i>
+                <span>Instagram</span>
+            </div>
+            <div class="option">
+                <i class="fab fa-twitter"></i>
+                <span>Twitter</span>
+            </div>
+        </div>
+    </div>
+    <span id="cursur"></span>
+
+    <script>
+        let selects = document.querySelector(".select");
+        let select_text = document.getElementById("select_text");
+        let select_arrow = document.getElementById("select_arrow");
+        let options_item = document.querySelector(".option-list");
+        let option = document.querySelectorAll(".option");
+
+        selects.addEventListener("click", () => {
+            options_item.classList.toggle("hide");
+            select_arrow.classList.toggle("rotate");
+        });
+
+        option.forEach(opt => {
+            opt.addEventListener("click", () => {
+                select_text.innerHTML = opt.innerHTML;
+                options_item.classList.add("hide");
+                select_arrow.classList.remove("rotate");
+            });
+        });
+
+        document.addEventListener('click', (event) => {
+            if (!selects.contains(event.target) && !options_item.contains(event.target)) {
+                options_item.classList.add("hide");
+                select_arrow.classList.remove("rotate");
+            }
+        });
+
+        let cursor = document.getElementById("cursur");
+        options_item.addEventListener("mousemove", (e) => {
+            cursor.style.top = e.pageY + "px";
+            cursor.style.left = e.pageX + "px";
+            cursor.style.display = "block";
+        });
+        options_item.addEventListener("mouseleave", () => {
+            cursor.style.display = "none";
+        });
+        option.forEach((opt) => {
+            opt.addEventListener("mouseenter", () => {
+                let selectedContent = opt.querySelector(".fab");
+                cursor.innerHTML = selectedContent.outerHTML;
+            });
+        });
+    </script>
+</body>
+
+</html>
