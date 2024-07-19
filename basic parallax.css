@@ -1,0 +1,123 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto', sans-serif;
+    scroll-behavior: smooth;
+}
+
+header {
+    background: #333;
+    color: #fff;
+    padding: 20px 0;
+    text-align: center;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+nav {
+    background: #444;
+    padding: 10px 0;
+    position: sticky;
+    top: 70px;
+    z-index: 1000;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    margin: 0;
+    padding: 0;
+}
+
+nav ul li {
+    margin: 0 15px;
+}
+
+nav ul li a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 1.2em;
+    transition: color 0.3s;
+}
+
+nav ul li a:hover {
+    color: #ff6347;
+}
+
+h1, h2 {
+    margin: 0;
+    font-size: 2.5em;
+}
+
+.parallax {
+    position: relative;
+    height: 500px;
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: center;
+    /* Add gradient background color */
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('parallax1.jpg');
+    animation: backgroundAnimation 20s infinite alternate;
+}
+
+/* Specific background images for each parallax section */
+.parallax1 {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('parallax1.jpg');
+}
+
+.parallax2 {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('parallax2.jpg');
+}
+
+.parallax3 {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('parallax3.jpg');
+}
+
+@keyframes backgroundAnimation {
+    0% { filter: brightness(100%); }
+    50% { filter: brightness(110%); }
+    100% { filter: brightness(100%); }
+}
+
+.text {
+    padding: 50px 20px;
+    text-align: center;
+    background: #f4f4f4;
+}
+
+.text h2 {
+    margin-bottom: 20px;
+    font-size: 2em;
+}
+
+.text p {
+    margin: 0;
+    font-size: 1.2em;
+    color: #666;
+}
+
+.content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #fff;
+    text-align: center;
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 10px;
+}
+
+footer {
+    background: #333;
+    color: #fff;
+    text-align: center;
+    padding: 10px 0;
+}
+
+footer p {
+    margin: 0;
+    font-size: 1em;
+}
