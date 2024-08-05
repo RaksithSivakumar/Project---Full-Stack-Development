@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random Quote Generator</title>
+    <style>
+        #quote {
+            font-size: 1.5em;
+            margin: 20px;
+        }
+        button {
+            margin: 20px;
+        }
+    </style>
+</head>
+<body>
+    <script>
+        const quotes = [
+            "The best way to predict the future is to invent it.",
+            "Life is 10% what happens to us and 90% how we react to it.",
+            "The only way to do great work is to love what you do.",
+            "If you can dream it, you can achieve it.",
+            "Change the world by being yourself."
+        ];
+
+        function generateQuote() {
+            const randomIndex = Math.floor(Math.random() * quotes.length);
+            quoteDiv.innerText = quotes[randomIndex];
+        }
+
+        const quoteDiv = document.createElement('div');
+        quoteDiv.id = 'quote';
+        document.body.appendChild(quoteDiv);
+
+        const button = document.createElement('button');
+        button.innerText = 'Get a new quote';
+        button.onclick = generateQuote;
+        document.body.appendChild(button);
+
+        generateQuote();
+    </script>
+</body>
+</html>
