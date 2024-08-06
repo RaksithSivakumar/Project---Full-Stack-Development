@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width-device-width, initial-scale=1.0">
+        <title>Simple Stopwatch</title>
+        <style>
+            body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            font-family: Arial, sans-serif;
+            }
+            .stopwatch {
+                text-align: center;
+            }
+            .display {
+                font-size: 2em;
+                margin-bottom: 20px;
+            }
+            .controls button {
+                font-size: 1em;
+                padding: 10px;
+                margin: 5px;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="stopwatch">
+            <div class="display" id="display">00:00:00</div>
+            <div class="controls">
+                <button id="startStopBtn">Start</button>
+                <button id="resetBtn">Reset</button>
+            </div>
+        </div>
+        <script>
+            let timer;
+            let running = false;
+            let hours = 0;
+            let minutes = 0;
+            let seconds = 0;
+        
+            const display = document.getElementById('display');
+            const startStopBtn = document.getElementById('startStopBtn');
+            const resetBtn = document.getElementById('resetBtn');
+        
+            function updateDisplay() {
+              display.textContent = 
+                String(hours).padStart(2, '0') + ':' +
+                String(minutes).padStart(2, '0') + ':' +
+                String(seconds).padStart(2, '0');
+            }
+        
+            function startTimer() {
+              timer = setInterval(() => {
+                seconds++;
+                if (seconds === 60) {
+                  seconds = 0;
+                  minutes++;
+                }
+                if (minutes === 60) {
+                  minutes = 0;
+                  hours++;
+                }
+                updateDisplay();
+              }, 1000);
+            }
+        
+            function stopTimer() {
+              clearInterval(timer);
+            }
+        
+            startStopBtn.addEventListener('click', () => {
+              if (running) {
+                stopTimer();
+                startStopBtn.textContent = 'Start';
+              } else {
+                startTimer();
+                startStopBtn.textContent = 'Stop';
+              }
+              running = !running;
+            });
+        
+            resetBtn.addEventListener('click', () => {
+              stopTimer();
+              running = false;
+              startStopBtn.textContent = 'Start';
+              hours = 0;
+              minutes = 0;
+              seconds = 0;
+              updateDisplay();
+            });
+        </script>
+    </body>
+</html>
