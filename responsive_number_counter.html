@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Responsive Number Counting Animation</title>
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      background-color: #4ecdd6ac;
+      font-family: Arial, sans-serif;
+    }
+
+    .counter-container {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .counter {
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      font-size: 2rem;
+      color: #333;
+      text-align: center;
+      flex: 1;
+      min-width: 150px;
+    }
+
+    @media (max-width: 600px) {
+      .counter {
+        font-size: 1.5rem;
+        padding: 15px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="counter-container">
+    <div class="counter" data-target="1000">0</div>
+    <div class="counter" data-target="5000">0</div>
+    <div class="counter" data-target="12000">0</div>
+    <div class="counter" data-target="25000">0</div>
+  </div>
+
+  <script>
+    const counters = document.querySelectorAll('.counter');
+
+    counters.forEach(counter => {
+      counter.innerText = '0';
+
+      const updateCounter = () => {
+        const target = +counter.getAttribute('data-target');
+        const current = +counter.innerText;
+        const increment = target / 200; // Adjust the divisor for speed
+
+        if (current < target) {
+          counter.innerText = `${Math.ceil(current + increment)}`;
+          setTimeout(updateCounter, 10); // Adjust the timeout for speed
+        } else {
+          counter.innerText = target;
+        }
+      };
+
+      updateCounter();
+    });
+  </script>
+</body>
+</html>
